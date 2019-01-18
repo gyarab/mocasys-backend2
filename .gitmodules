@@ -1,0 +1,3 @@
+[submodule "dascore-be"]
+	path = dascore-be
+	url = git@gitlab.com:mocasys/dascore-be.git
