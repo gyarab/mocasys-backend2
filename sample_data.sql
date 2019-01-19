@@ -1,19 +1,19 @@
+INSERT INTO users_current (username) VALUES
+    ('tester1'),
+    ('tester2');
+
+INSERT INTO user_permissions_current (id_user, id_permission) VALUES
+    (1, 10),
+    (2, 10),
+    (1, 1),
+    (1, 5),
+    (1, 8);
+
+SELECT session_user_set(1);
+
 INSERT INTO people (name, birth_date) VALUES
-	('Tester 1', '2001-01-01'),
-	('Tester 2', '2002-02-02');
-
-INSERT INTO users (username, id_person) VALUES
-	('tester1', 1),
-	('tester2', 2);
-
-INSERT INTO user_permissions (id_user, id_permission) VALUES
-	(1, 10),
-	(2, 10),
-	(1, 1);
-
-DROP OWNED BY viewowner;
-DROP ROLE IF EXISTS viewowner;
-CREATE ROLE viewowner;
+    ('Tester 1', '2001-01-01'),
+    ('Tester 2', '2002-02-02');
 
 DROP OWNED BY uptest;
 DROP ROLE IF EXISTS uptest;
