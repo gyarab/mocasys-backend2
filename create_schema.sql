@@ -1,4 +1,4 @@
--- General users/permissions
+-- People
 
 CREATE TABLE IF NOT EXISTS people_current (
     id serial PRIMARY KEY,
@@ -6,6 +6,26 @@ CREATE TABLE IF NOT EXISTS people_current (
     birth_date date NOT NULL
 );
 SELECT version_table('people');
+
+-- DASCore tables
+
+CREATE TABLE IF NOT EXISTS users_current (
+    id serial PRIMARY KEY,
+    username text NOT NULL,
+    id_person integer REFERENCES people_current
+);
+SELECT version_table('users');
+
+CREATE TABLE IF NOT EXISTS permissions (
+    name text PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS user_permissions_current (
+    id_user integer REFERENCES users_current NOT NULL,
+    permission text REFERENCES permissions NOT NULL,
+    PRIMARY KEY (id_user, permission)
+);
+SELECT version_table('user_permissions');
 
 -- Auth
 

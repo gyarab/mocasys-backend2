@@ -2,12 +2,12 @@ INSERT INTO users_current (username) VALUES
     ('tester1'),
     ('tester2');
 
-INSERT INTO user_permissions_current (id_user, id_permission) VALUES
-    (1, 10),
-    (2, 10),
-    (1, 1),
-    (1, 5),
-    (1, 8);
+INSERT INTO user_permissions_current (id_user, permission) VALUES
+    (1, 'user_permissions.select.self'),
+    (2, 'user_permissions.select.self'),
+    (1, 'users.select.all'),
+    (1, 'people.select.all'),
+    (1, 'people.modify.all');
 
 SELECT session_user_set(1);
 
