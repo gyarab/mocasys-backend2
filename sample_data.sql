@@ -7,7 +7,9 @@ INSERT INTO user_permissions_current (id_user, permission) VALUES
     (2, 'user_permissions.select.self'),
     (1, 'users.select.all'),
     (1, 'people.select.all'),
-    (1, 'people.modify.all');
+    (1, 'people.modify.all'),
+    (1, 'user_password.select.all'),
+    (1, 'user_password.modify.self');
 
 SELECT session_user_set(1);
 

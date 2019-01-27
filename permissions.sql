@@ -4,14 +4,36 @@ DO $$
         perms text[] := ARRAY[
             'users.select.all',
             'users.select.self',
-            'users.modify.self',
             'users.modify.all',
+            'users.modify.self',
+
             'people.select.all',
             'people.select.self',
-            'people.modify.self',
             'people.modify.all',
+            'people.modify.self',
+
             'user_permissions.both.all',
-            'user_permissions.select.self'
+            'user_permissions.select.self',
+
+            'user_password.select.all',
+            'user_password.select.self',
+            'user_password.modify.all',
+            'user_password.modify.self',
+
+            'food.select',
+            'food.modify',
+
+            'food_assignments.select',
+            'food_assignments.modify',
+
+            'diners.select.all',
+            'diners.select.self',
+            'diners.modify.all',
+
+            'food_choice.select.all',
+            'food_choice.select.self',
+            'food_choice.modify.all',
+            'food_choice.modify.self'
         ];
     BEGIN
         INSERT INTO permissions (name)
@@ -40,6 +62,13 @@ SELECT dascore_setup_table('users',
         OR (perm('users.modify.all') AND NEW.id IS NULL)
     $$);
 
+CREATE OR REPLACE FUNCTION session_person_get() RETURNS integer
+LANGUAGE SQL AS $$
+    -- TODO: For purposes of permissions, should we select from the combined
+    -- view or the _current table?
+    SELECT id_person FROM users WHERE id = session_user_get()
+$$;
+
 SELECT dascore_setup_table('user_permissions',
     select_perm := $$
         perm('user_permissions.both.all')
@@ -50,12 +79,53 @@ SELECT dascore_setup_table('user_permissions',
         perm('user_permissions.both.all')
     $$);
 
+SELECT dascore_setup_table_unversioned('user_password',
+    select_perm := $$
+        perm('user_password.select.all')
+        OR (perm('user_password.select.self')
+            AND ROW.id_user = session_user_get())
+    $$,
+    modify_perm := $$
+        perm('user_password.modify.all')
+        OR (perm('user_password.modify.self')
+            AND ROW.id_user = session_user_get())
+    $$
+);
+
 SELECT dascore_setup_table('people',
     select_perm := $$
         perm('people.select.all')
-        OR (perm('people.select.self') AND false) -- TODO
+        OR (perm('people.select.self') AND ROW.id = session_person_get())
     $$,
     modify_perm := $$
         perm('people.modify.all')
-        OR (perm('people.modify.self') AND false) -- TODO
+        OR (perm('people.modify.self') AND ROW.id = session_person_get())
+    $$);
+
+SELECT dascore_setup_table('food',
+    select_perm := $$ perm('food.select') $$,
+    modify_perm := $$ perm('food.modify') $$);
+
+SELECT dascore_setup_table('food_assignments',
+    select_perm := $$ perm('food_assignments.select') $$,
+    modify_perm := $$ perm('food_assignments.modify') $$);
+
+SELECT dascore_setup_table('diners',
+    select_perm := $$
+        perm('diners.select.all')
+        OR (perm('diners.select.self')
+            AND ROW.id_person = session_person_get())
+    $$);
+
+SELECT dascore_setup_table('food_choice',
+    select_perm := $$
+        perm('food_choice.select.all')
+        OR (perm('food_choice.select.self')
+            AND id_diner = session_person_get())
+    $$,
+    modify_perm := $$
+        -- TODO: Do not allow modification after a certain point in time
+        perm('food_choice.modify.all')
+        OR (perm('food_choice.modify.self')
+            AND id_diner = session_person_get())
     $$);

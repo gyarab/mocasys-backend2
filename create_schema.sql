@@ -29,7 +29,7 @@ SELECT version_table('user_permissions');
 
 -- Auth
 
-CREATE TABLE IF NOT EXISTS user_password (
+CREATE TABLE IF NOT EXISTS user_password_data (
     id_user integer REFERENCES users_current,
     pw_hash text NOT NULL,
     PRIMARY KEY (id_user)
