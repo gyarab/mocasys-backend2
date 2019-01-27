@@ -53,13 +53,11 @@ $$;
 SELECT dascore_setup_table('users',
     select_perm := $$
         perm('users.select.all')
-        OR (perm('users.select.self') AND session_user_get() = id)
+        OR (perm('users.select.self') AND ROW.id = session_user_get())
     $$,
-    insert_perm := $$ perm('users.modify.all') $$,
-    delete_perm := $$ perm('users.modify.all') $$,
-    update_perm := $$
+    modify_perm := $$
         perm('users.modify.all')
-        OR (perm('users.modify.all') AND NEW.id IS NULL)
+        OR (perm('users.modify.self') AND ROW.id = session_user_get())
     $$);
 
 CREATE OR REPLACE FUNCTION session_person_get() RETURNS integer
