@@ -11,7 +11,7 @@ INSERT INTO user_permissions_current (id_user, permission) VALUES
     (1, 'user_password.select.all'),
     (1, 'user_password.modify.self');
 
-SELECT session_user_set(1);
+SELECT session_user_set(1, 'secret');
 
 INSERT INTO people (name, birth_date) VALUES
     ('Tester 1', '2001-01-01'),
