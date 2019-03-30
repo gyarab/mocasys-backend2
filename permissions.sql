@@ -15,10 +15,10 @@ DO $$
             'user_permissions.both.all',
             'user_permissions.select.self',
 
-            'user_password.select.all',
-            'user_password.select.self',
-            'user_password.modify.all',
-            'user_password.modify.self',
+            'user_passwords.select.all',
+            'user_passwords.select.self',
+            'user_passwords.modify.all',
+            'user_passwords.modify.self',
 
             'food.select',
             'food.modify',
@@ -77,15 +77,15 @@ SELECT dascore_setup_table('user_permissions',
         perm('user_permissions.both.all')
     $$);
 
-SELECT dascore_setup_table_unversioned('user_password',
+SELECT dascore_setup_table_unversioned('user_passwords',
     select_perm := $$
-        perm('user_password.select.all')
-        OR (perm('user_password.select.self')
+        perm('user_passwords.select.all')
+        OR (perm('user_passwords.select.self')
             AND ROW.id_user = session_user_get())
     $$,
     modify_perm := $$
-        perm('user_password.modify.all')
-        OR (perm('user_password.modify.self')
+        perm('user_passwords.modify.all')
+        OR (perm('user_passwords.modify.self')
             AND ROW.id_user = session_user_get())
     $$
 );

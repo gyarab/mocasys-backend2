@@ -2,7 +2,7 @@ INSERT INTO users_current (username) VALUES
     ('tester1'),
     ('tester2');
 
-INSERT INTO user_password_data VALUES
+INSERT INTO user_passwords_data VALUES
     -- PASSWORD: 1234567890
     (1, '736372797074000e0000000800000001b9956625cadd6f7f1384ac244753bc584a422dd866d38c64999af791115e7d1a84d56551ea3668fb6c4b3f52b0f38b44356226b23d21b3e1dc8e6f17b68599a99fd98cf6784c1fdb41c978feef72597b'),
     -- PASSWORD: 0987654321
@@ -14,8 +14,8 @@ INSERT INTO user_permissions_current (id_user, permission) VALUES
     (1, 'users.select.all'),
     (1, 'people.select.all'),
     (1, 'people.modify.all'),
-    (1, 'user_password.select.all'),
-    (1, 'user_password.modify.self');
+    (1, 'user_passwords.select.all'),
+    (1, 'user_passwords.modify.self');
 
 SELECT session_user_set(1, 'secret');
 
