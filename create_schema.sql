@@ -35,6 +35,14 @@ CREATE TABLE IF NOT EXISTS user_passwords_data (
     PRIMARY KEY (id_user)
 );
 
+CREATE TABLE IF NOT EXISTS user_mifare_cards_current (
+    id_user integer REFERENCES users_current,
+    card_id bytea PRIMARY KEY,
+    access_key bytea NOT NULL,
+    secret_key bytea NOT NULL
+);
+SELECT version_table('user_mifare_cards');
+
 -- Food
 
 CREATE TABLE IF NOT EXISTS food_current (

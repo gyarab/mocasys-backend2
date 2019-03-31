@@ -1,6 +1,7 @@
 INSERT INTO users_current (username) VALUES
     ('tester1'),
-    ('tester2');
+    ('tester2'),
+    ('servterm');
 
 INSERT INTO user_passwords_data VALUES
     -- PASSWORD: 1234567890
@@ -15,7 +16,8 @@ INSERT INTO user_permissions_current (id_user, permission) VALUES
     (1, 'people.select.all'),
     (1, 'people.modify.all'),
     (1, 'user_passwords.select.all'),
-    (1, 'user_passwords.modify.self');
+    (1, 'user_passwords.modify.self'),
+    (3, 'user_mifare_cards.select.access_key');
 
 SELECT session_user_set(1, 'secret');
 

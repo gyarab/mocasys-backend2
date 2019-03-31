@@ -20,6 +20,10 @@ DO $$
             'user_passwords.modify.all',
             'user_passwords.modify.self',
 
+            'user_mifare_cards.select',
+            'user_mifare_cards.select.access_key',
+            'user_mifare_cards.modify',
+
             'food.select',
             'food.modify',
 
@@ -89,6 +93,10 @@ SELECT dascore_setup_table_unversioned('user_passwords',
             AND ROW.id_user = session_user_get())
     $$
 );
+
+SELECT dascore_setup_table('user_mifare_cards',
+    select_perm := $$ perm('user_mifare_cards.select') $$,
+    modify_perm := $$ perm('user_mifare_cards.modify') $$);
 
 SELECT dascore_setup_table('people',
     select_perm := $$
