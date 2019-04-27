@@ -1,7 +1,11 @@
-INSERT INTO users_current (username) VALUES
-    ('tester1'),
-    ('tester2'),
-    ('servterm');
+INSERT INTO people_current (name, birth_date) VALUES
+    ('Tester 1', '2001-01-01'),
+    ('Tester 2', '2002-02-02');
+
+INSERT INTO users_current (id, username, id_person) VALUES
+    (1, 'tester1', 1),
+    (2, 'tester2', 2),
+    (3, 'servterm', null);
 
 INSERT INTO user_passwords_data VALUES
     -- PASSWORD: 1234567890
@@ -17,13 +21,14 @@ INSERT INTO user_permissions_current (id_user, permission) VALUES
     (1, 'people.modify.all'),
     (1, 'user_passwords.select.all'),
     (1, 'user_passwords.modify.self'),
-    (3, 'user_mifare_cards.select.access_key');
+    (3, 'user_mifare_cards.select.access_key'),
+    (1, 'diners.select.self');
+
+INSERT INTO diners_current (id_person, account_balance) VALUES
+    (1, 100::money),
+    (2, 200::money);
 
 SELECT session_user_set(1, 'secret');
-
-INSERT INTO people (name, birth_date) VALUES
-    ('Tester 1', '2001-01-01'),
-    ('Tester 2', '2002-02-02');
 
 DROP OWNED BY uptest;
 DROP ROLE IF EXISTS uptest;
@@ -35,3 +40,4 @@ GRANT ALL ON TABLE users_history TO uptest;
 GRANT ALL ON TABLE people TO uptest;
 GRANT ALL ON TABLE permissions TO uptest;
 GRANT ALL ON TABLE user_permissions TO uptest;
+GRANT ALL ON TABLE diners TO uptest;
