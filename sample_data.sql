@@ -22,11 +22,22 @@ INSERT INTO user_permissions_current (id_user, permission) VALUES
     (1, 'user_passwords.select.all'),
     (1, 'user_passwords.modify.self'),
     (3, 'user_mifare_cards.select.access_key'),
-    (1, 'diners.select.self');
+    (1, 'diners.select.self'),
+    (1, 'food.select'),
+    (1, 'food_choice.select.self'),
+    (1, 'food_assignments.select');
 
 INSERT INTO diners_current (id_person, account_balance) VALUES
     (1, 100::money),
     (2, 200::money);
+
+INSERT INTO food_current (name) VALUES
+    ('Tofu s tofu alá tofu'),
+    ('Babiččiny sušenky');
+
+INSERT INTO food_assignments_current (day, kind, id_food) VALUES
+    ('2019-04-21', 'main_course', 1),
+    ('2019-04-21', 'dessert', 2);
 
 SELECT session_user_set(1, 'secret');
 
@@ -41,3 +52,6 @@ GRANT ALL ON TABLE people TO uptest;
 GRANT ALL ON TABLE permissions TO uptest;
 GRANT ALL ON TABLE user_permissions TO uptest;
 GRANT ALL ON TABLE diners TO uptest;
+GRANT ALL ON TABLE food TO uptest;
+GRANT ALL ON TABLE food_assignments TO uptest;
+GRANT ALL ON TABLE food_choice TO uptest;
