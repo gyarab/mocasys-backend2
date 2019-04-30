@@ -53,9 +53,10 @@ SELECT version_table('food');
 
 CREATE TABLE IF NOT EXISTS food_assignments_current (
     id_food integer REFERENCES food_current,
-    day date,
+    day date NOT NULL,
     kind text, -- TODO: Naming? Another table?
-    PRIMARY KEY (id_food, day, kind)
+    option text,
+    PRIMARY KEY (id_food, day, kind, option)
 );
 SELECT version_table('food_assignments');
 
