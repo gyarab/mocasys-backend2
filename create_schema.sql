@@ -69,8 +69,9 @@ SELECT version_table('diners');
 
 CREATE TABLE IF NOT EXISTS food_choice_current (
     id_diner integer REFERENCES diners_current,
-    day date,
+    day date NOT NULL,
     kind text,
-    PRIMARY KEY (id_diner, day, kind)
+    option text,
+    PRIMARY KEY (id_diner, day, kind, option)
 );
 SELECT version_table('food_choice');
