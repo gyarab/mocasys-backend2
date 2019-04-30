@@ -17,6 +17,7 @@ INSERT INTO user_permissions_current (id_user, permission) VALUES
     (1, 'user_permissions.select.self'),
     (2, 'user_permissions.select.self'),
     (1, 'users.select.all'),
+    (1, 'users.modify.all'),
     (1, 'people.select.all'),
     (1, 'people.modify.all'),
     (1, 'user_passwords.select.all'),
