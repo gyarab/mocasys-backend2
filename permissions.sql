@@ -127,11 +127,11 @@ SELECT dascore_setup_table('food_choice',
     select_perm := $$
         perm('food_choice.select.all')
         OR (perm('food_choice.select.self')
-            AND id_diner = session_person_get())
+            AND ROW.id_diner = session_person_get())
     $$,
     modify_perm := $$
         -- TODO: Do not allow modification after a certain point in time
         perm('food_choice.modify.all')
         OR (perm('food_choice.modify.self')
-            AND id_diner = session_person_get())
+            AND ROW.id_diner = session_person_get())
     $$);
