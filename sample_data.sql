@@ -26,6 +26,7 @@ INSERT INTO user_permissions_current (id_user, permission) VALUES
     (1, 'diners.select.self'),
     (1, 'food.select'),
     (1, 'food_choice.select.self'),
+    (1, 'food_choice.modify.self'),
     (1, 'food_assignments.select');
 
 INSERT INTO diners_current (id_person, account_balance) VALUES
