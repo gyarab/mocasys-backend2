@@ -43,12 +43,12 @@ INSERT INTO food_current (name) VALUES
     ('Cheesecake');
 
 INSERT INTO food_assignments_current (day, kind, option, id_food) VALUES
-    ('2019-05-01', 'main_course', '1', 3),
-    ('2019-05-01', 'main_course', '2', 1),
-    ('2019-05-01', 'dessert', '', 2),
-    ('2019-05-02', 'soup', '', 5),
-    ('2019-05-02', 'main_course', '1', 4),
-    ('2019-05-02', 'main_course', '2', 6);
+    ('2019-05-09', 'main_course', '1', 3),
+    ('2019-05-09', 'main_course', '2', 1),
+    ('2019-05-09', 'dessert', '', 2),
+    ('2019-05-10', 'soup', '', 5),
+    ('2019-05-10', 'main_course', '1', 4),
+    ('2019-05-10', 'main_course', '2', 6);
 
 SELECT session_user_set(1, 'secret');
 

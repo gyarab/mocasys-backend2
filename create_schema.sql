@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS food_choice_current (
     day date NOT NULL,
     kind text,
     option text,
-    PRIMARY KEY (id_diner, day, kind, option),
+    PRIMARY KEY (id_diner, day, kind),
     FOREIGN KEY (day, kind, option)
         REFERENCES food_assignments_current (day, kind, option)
 );
