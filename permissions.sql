@@ -130,8 +130,10 @@ SELECT dascore_setup_table('food_choice',
             AND ROW.id_diner = session_person_get())
     $$,
     modify_perm := $$
-        -- TODO: Do not allow modification after a certain point in time
         perm('food_choice.modify.all')
         OR (perm('food_choice.modify.self')
-            AND ROW.id_diner = session_person_get())
+            AND ROW.id_diner = session_person_get()
+            -- TODO: Allow choosing delay and separate change of meal and
+            -- cancellation for the day.
+            AND ROW.day >= current_date + '1 day'::interval)
     $$);

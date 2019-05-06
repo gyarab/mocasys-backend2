@@ -52,11 +52,11 @@ CREATE TABLE IF NOT EXISTS food_current (
 SELECT version_table('food');
 
 CREATE TABLE IF NOT EXISTS food_assignments_current (
-    id_food integer REFERENCES food_current,
     day date NOT NULL,
     kind text, -- TODO: Naming? Another table?
-    option text,
-    PRIMARY KEY (id_food, day, kind, option)
+    option text DEFAULT '',
+    id_food integer REFERENCES food_current,
+    PRIMARY KEY (day, kind, option)
 );
 SELECT version_table('food_assignments');
 
@@ -72,6 +72,8 @@ CREATE TABLE IF NOT EXISTS food_choice_current (
     day date NOT NULL,
     kind text,
     option text,
-    PRIMARY KEY (id_diner, day, kind, option)
+    PRIMARY KEY (id_diner, day, kind, option),
+    FOREIGN KEY (day, kind, option)
+        REFERENCES food_assignments_current (day, kind, option)
 );
 SELECT version_table('food_choice');
