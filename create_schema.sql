@@ -72,8 +72,10 @@ CREATE TABLE IF NOT EXISTS food_choice_current (
     day date NOT NULL,
     kind text,
     option text,
+	ordered boolean NOT NULL DEFAULT true,
     PRIMARY KEY (id_diner, day, kind),
     FOREIGN KEY (day, kind, option)
-        REFERENCES food_assignments_current (day, kind, option)
+        REFERENCES food_assignments_current (day, kind, option),
+	CHECK (option IS NOT NULL = ordered)
 );
 SELECT version_table('food_choice');
