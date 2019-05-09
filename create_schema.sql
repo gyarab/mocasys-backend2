@@ -61,11 +61,23 @@ CREATE TABLE IF NOT EXISTS food_assignments_current (
 SELECT version_table('food_assignments');
 
 CREATE TABLE IF NOT EXISTS diners_current (
-    id_person integer REFERENCES people_current,
-    account_balance money NOT NULL DEFAULT 0::money,
+    id_person integer NOT NULL REFERENCES people_current,
     PRIMARY KEY (id_person)
 );
 SELECT version_table('diners');
+
+CREATE TABLE IF NOT EXISTS diner_transactions_current (
+	id_diner integer NOT NULL REFERENCES diners_current,
+	-- Positive for money added to the diner's balance, negative for expenses
+	-- taken from the balance
+	amount decimal NOT NULL,
+	-- Not null if a food order caused the transaction
+	cause_food_day date,
+	PRIMARY KEY (id_diner),
+	-- Transactions caused by food orders should always be expenses or free
+	CHECK (NOT (cause_food_day IS NOT NULL AND (amount > 0)))
+);
+SELECT version_table('diner_transactions');
 
 CREATE TABLE IF NOT EXISTS food_choice_current (
     id_diner integer REFERENCES diners_current,

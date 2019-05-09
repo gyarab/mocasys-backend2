@@ -34,6 +34,10 @@ DO $$
             'diners.select.self',
             'diners.modify.all',
 
+			'diner_transactions.select.self',
+			'diner_transactions.select.all',
+			'diner_transactions.modify.all',
+
             'food_choice.select.all',
             'food_choice.select.self',
             'food_choice.modify.all',
@@ -122,6 +126,16 @@ SELECT dascore_setup_table('diners',
         OR (perm('diners.select.self')
             AND ROW.id_person = session_person_get())
     $$);
+
+SELECT dascore_setup_table('diner_transactions',
+	select_perm := $$
+		perm('diner_transactions.select.all')
+		OR (perm('diner_transactions.select.self')
+			AND ROW.id_diner = session_person_get())
+	$$,
+	modify_perm := $$
+		perm('diner_transactions.modify.all')
+	$$);
 
 SELECT dascore_setup_table('food_choice',
     select_perm := $$

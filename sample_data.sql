@@ -29,9 +29,13 @@ INSERT INTO user_permissions_current (id_user, permission) VALUES
     (1, 'food_choice.modify.self'),
     (1, 'food_assignments.select');
 
-INSERT INTO diners_current (id_person, account_balance) VALUES
-    (1, 100::money),
-    (2, 200::money);
+INSERT INTO diners_current (id_person) VALUES
+    (1),
+    (2);
+
+INSERT INTO diner_transactions_current (id_diner, amount) VALUES
+	(1, 100),
+	(2, 200);
 
 INSERT INTO food_current (name) VALUES
     ('Tofu s tofu alá tofu'),
