@@ -70,6 +70,7 @@ GRANT ALL ON TABLE people TO uptest;
 GRANT ALL ON TABLE permissions TO uptest;
 GRANT ALL ON TABLE user_permissions TO uptest;
 GRANT ALL ON TABLE diners TO uptest;
+GRANT ALL ON TABLE diner_transactions TO uptest;
 GRANT ALL ON TABLE food TO uptest;
 GRANT ALL ON TABLE food_assignments TO uptest;
 GRANT ALL ON TABLE food_choice TO uptest;
