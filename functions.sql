@@ -12,3 +12,9 @@ BEGIN
         WHERE card_id = _id);
 END;
 $func$;
+
+CREATE OR REPLACE FUNCTION diner_balance(_id integer) RETURNS decimal
+LANGUAGE SQL AS $$
+    SELECT SUM(amount) FROM diner_transactions
+    WHERE id_diner = _id;
+$$;
