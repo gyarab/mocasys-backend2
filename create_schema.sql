@@ -67,13 +67,13 @@ CREATE TABLE IF NOT EXISTS diners_current (
 SELECT version_table('diners');
 
 CREATE TABLE IF NOT EXISTS diner_transactions_current (
+    id serial PRIMARY KEY,
 	id_diner integer NOT NULL REFERENCES diners_current,
 	-- Positive for money added to the diner's balance, negative for expenses
 	-- taken from the balance
 	amount decimal NOT NULL,
 	-- Not null if a food order caused the transaction
 	cause_food_day date,
-	PRIMARY KEY (id_diner),
 	-- Transactions caused by food orders should always be expenses or free
 	CHECK (NOT (cause_food_day IS NOT NULL AND (amount > 0)))
 );
