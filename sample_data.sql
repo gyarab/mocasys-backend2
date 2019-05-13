@@ -18,15 +18,22 @@ INSERT INTO user_permissions_current (id_user, permission) VALUES
     (2, 'user_permissions.select.self'),
     (1, 'users.select.all'),
     (1, 'users.modify.all'),
+    (2, 'users.select.self'),
     (1, 'people.select.all'),
     (1, 'people.modify.all'),
+    (2, 'people.select.self'),
     (1, 'user_passwords.select.all'),
     (1, 'user_passwords.modify.self'),
     (3, 'user_mifare_cards.select.access_key'),
     (1, 'diners.select.self'),
+    (2, 'diners.select.self'),
     (1, 'food.select'),
+    (1, 'food.modify'),
+    (2, 'food.select'),
     (1, 'food_choice.select.self'),
     (1, 'food_choice.modify.self'),
+    (2, 'food_choice.select.self'),
+    (2, 'food_choice.modify.self'),
     (1, 'food_assignments.select'),
     (2, 'food_assignments.select'),
     (1, 'food_assignments.modify'),
@@ -52,12 +59,12 @@ INSERT INTO food_current (name) VALUES
     ('Cheesecake');
 
 INSERT INTO food_assignments_current (day, kind, option, id_food) VALUES
-    ('2019-05-09', 'main_course', '1', 3),
-    ('2019-05-09', 'main_course', '2', 1),
-    ('2019-05-09', 'dessert', '', 2),
-    ('2019-05-10', 'soup', '', 5),
-    ('2019-05-10', 'main_course', '1', 4),
-    ('2019-05-10', 'main_course', '2', 6);
+    ('2019-05-20', 'main_course', '1', 3),
+    ('2019-05-20', 'main_course', '2', 1),
+    ('2019-05-20', 'dessert', '', 2),
+    ('2019-05-21', 'soup', '', 5),
+    ('2019-05-21', 'main_course', '1', 4),
+    ('2019-05-21', 'main_course', '2', 6);
 
 SELECT session_user_set(1, 'secret');
 
